@@ -1,8 +1,30 @@
 {
     "cytoscape": {
         "position": "absolute",
-        "width": "100%",
-        "height": "100%",
+        "width": "80%",
+        "height": "80%",
         "z-index": 999
-    }
+    },
+
+    "stylesheet": [
+        {
+            "selector": "node",
+            "style": {
+                "content": "data(label)",
+                "text-valign":"bottom",
+                "text-halign":"center",
+                "text-rotation": "350deg",
+                "background-color": "data(color)"
+            }
+        },
+        {
+            "selector": "edge",
+            "style": {
+                "target-arrow-color": "data(color)",
+                "target-arrow-shape": "vee",
+                "curve-style": "bezier",
+                "line-color": "data(color)"
+            }
+        }
+    ]
 }
