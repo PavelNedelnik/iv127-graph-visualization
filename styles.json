@@ -14,7 +14,8 @@
                 "text-valign":"bottom",
                 "text-halign":"center",
                 "text-rotation": "350deg",
-                "background-color": "data(color)"
+                "background-color": "data(color)",
+                "shape": "data(shape)"
             }
         },
         {
