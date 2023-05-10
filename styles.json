@@ -11,11 +11,51 @@
             "selector": "node",
             "style": {
                 "content": "data(label)",
+                "shape": "data(base_shape)",
                 "text-valign":"bottom",
                 "text-halign":"center",
                 "text-rotation": "350deg",
-                "background-color": "data(color)",
-                "shape": "data(shape)"
+                "background-opacity": "1",
+                "border-opacity": "1",
+                "border-width": "3"
+                
+            }
+        },
+        {
+            "selector": "[selected = 'False']",
+            "style": {
+                "width": "30",
+                "height": "30",
+                "background-color": "data(base_color)",
+                "background-opacity": "0.6",
+                "border-color": "data(base_color)"
+            }
+        },
+        {
+            "selector": "[selected = 'True']",
+            "style": {
+                "width": "60",
+                "height": "60",
+                "background-color": "red",
+                "border-color": "red"
+            }
+        },
+        {
+            "selector": "[selected = 'Child']",
+            "style": {
+                "width": "40",
+                "height": "40",
+                "background-color": "yellow",
+                "border-color": "yellow"
+            }
+        },
+        {
+            "selector": "[selected = 'Parent']",
+            "style": {
+                "width": "40",
+                "height": "40",
+                "background-color": "orange",
+                "border-color": "orange"
             }
         },
         {

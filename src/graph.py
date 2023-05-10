@@ -28,8 +28,6 @@ def graph_as_elements(G, pos=None, scale_x=1, scale_y=1):
     elements = [{
             'data': {
                 'id': garph_index_to_elements(idx),
-                'label':params['label'],
-                'color': params['color']
             } | params, 
             'position': {'x': int(pos[idx][0] * scale_x), 'y': int(pos[idx][1] * scale_y)} if pos is not None else {'x': 0, 'y': 0}
         } for idx, params in G.nodes(data=True) ]
@@ -42,8 +40,8 @@ def graph_from_elements(elements, size):
                       for elem in elements if 'source' not in elem['data']])
     G.add_edges_from([
         edge_pair_from_elements(elem) for elem in elements
-            if 'source' in elem['data'] and elem['data']['color'] == 'black'
-    ], color='black')
+            if 'source' in elem['data'] and elem['data']['color'] == 'dimgray'
+    ], color='dimgray')
     G.add_edges_from([
         edge_pair_from_elements(elem) for elem in elements
             if 'source' in elem['data'] and elem['data']['color'] == 'silver'
