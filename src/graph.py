@@ -31,7 +31,7 @@ def graph_as_elements(G, pos=None, scale_x=1, scale_y=1):
                 'label':params['label'],
                 'color': params['color']
             } | params, 
-            'position': {'x': pos[idx][0] * scale_x, 'y': pos[idx][1] * scale_y} if pos is not None else {'x': 0, 'y': 0}
+            'position': {'x': int(pos[idx][0] * scale_x), 'y': int(pos[idx][1] * scale_y)} if pos is not None else {'x': 0, 'y': 0}
         } for idx, params in G.nodes(data=True) ]
     elements += [graph_edge_as_elements(s, t, params) for s, t, params in G.edges(data=True)]
     return elements
