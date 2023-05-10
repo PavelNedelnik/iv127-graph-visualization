@@ -20,8 +20,7 @@ def graph_edge_as_elements(source, target, params):
         'data': {
             'source': garph_index_to_elements(source),
             'target': garph_index_to_elements(target),
-            'color': params['color']
-        }
+        } | params
     }
 
 def graph_as_elements(G, pos=None, scale_x=1, scale_y=1):
@@ -37,25 +36,11 @@ def graph_as_elements(G, pos=None, scale_x=1, scale_y=1):
 def graph_from_elements(elements, size):
     G = nx.DiGraph(size=size)
     G.add_nodes_from([(graph_index_from_elements(elem), elem['data'])
-                      for elem in elements if 'source' not in elem['data']])
-    G.add_edges_from([
-        edge_pair_from_elements(elem) for elem in elements
-            if 'source' in elem['data'] and elem['data']['color'] == 'dimgray'
-    ], color='dimgray')
-    G.add_edges_from([
-        edge_pair_from_elements(elem) for elem in elements
-            if 'source' in elem['data'] and elem['data']['color'] == 'silver'
-    ], color='silver')
+                      for elem in elements if not is_element_edge(elem)])
+    for elem in elements:
+        if is_element_edge(elem):
+            G.add_edge(*edge_pair_from_elements(elem), updated=elem['data']['updated'], type=elem['data']['type'])
     return G
-
-
-def filter_edge_from_elements(edge, elements):
-    pred = lambda e: 'source' not in e['data'] or \
-        'target' not in e['data'] or \
-        e['data']['source'] != edge['data']['source'] or \
-        e['data']['target'] != edge['data']['target']
-
-    return list(filter(pred, elements))
 
 
 def modify_by_id(elements, id, key, value):

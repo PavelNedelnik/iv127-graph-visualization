@@ -61,10 +61,36 @@
         {
             "selector": "edge",
             "style": {
-                "target-arrow-color": "data(color)",
                 "target-arrow-shape": "vee",
-                "curve-style": "bezier",
-                "line-color": "data(color)"
+                "curve-style": "bezier"
+            }
+        },
+        {
+            "selector": "[type = 'kc']",
+            "style": {
+                "target-arrow-color": "dimgrey",
+                "line-color": "dimgrey"
+            }
+        },
+        {
+            "selector": "[type = 'ps']",
+            "style": {
+                "target-arrow-color": "silver",
+                "line-color": "silver"
+            }
+        },
+        {
+            "selector": "[updated = 'Added']",
+            "style": {
+                "target-arrow-color": "red",
+                "line-color": "red"
+            }
+        },
+        {
+            "selector": "[updated = 'Removed']",
+            "style": {
+                "target-arrow-color": "blue",
+                "line-color": "blue"
             }
         }
     ]
