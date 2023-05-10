@@ -40,6 +40,21 @@ def graph_from_elements(elements, size):
     G = nx.DiGraph(size=size)
     G.add_nodes_from([(graph_index_from_elements(elem), elem['data'])
                       for elem in elements if 'source' not in elem['data']])
-    G.add_edges_from([edge_pair_from_elements(elem) for elem in elements if 'source' in elem['data'] and elem['data']['color'] == 'black'], color='black')
-    G.add_edges_from([edge_pair_from_elements(elem) for elem in elements if 'source' in elem['data'] and elem['data']['color'] == 'silver'], color='silver')
+    G.add_edges_from([
+        edge_pair_from_elements(elem) for elem in elements
+            if 'source' in elem['data'] and elem['data']['color'] == 'black'
+    ], color='black')
+    G.add_edges_from([
+        edge_pair_from_elements(elem) for elem in elements
+            if 'source' in elem['data'] and elem['data']['color'] == 'silver'
+    ], color='silver')
     return G
+
+
+def filter_edge_from_elements(edge, elements):
+    pred = lambda e: 'source' not in e['data'] or \
+        'target' not in e['data'] or \
+        e['data']['source'] != edge['data']['source'] or \
+        e['data']['target'] != edge['data']['target']
+
+    return list(filter(pred, elements))
