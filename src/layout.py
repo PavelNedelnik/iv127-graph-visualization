@@ -3,8 +3,9 @@ import dash_bootstrap_components as dbc
 import json
 from dash import dcc, html
 
-def make_layout(styles):
-    options = [{'label':val, 'value':val} for val in ['dot', 'fdp', 'twopi', 'circo']] # twopi, sfdp, circo
+def make_layout(styles, graph_layouts):
+    cyto.load_extra_layouts()
+    options = [{'label':val, 'value':val} for val in graph_layouts.keys()]
     tool_panel = dbc.Card(dbc.CardBody(dbc.Row([
         dbc.Col(dbc.Select(
             id='layout_select',

@@ -24,14 +24,14 @@ def graph_edge_as_elements(source, target, params):
         }
     }
 
-def graph_as_elements(G, pos):
+def graph_as_elements(G, pos=None, scale_x=1, scale_y=1):
     elements = [{
             'data': {
                 'id': garph_index_to_elements(idx),
                 'label':params['label'],
                 'color': params['color']
             } | params, 
-            'position': {'x': pos[idx][0], 'y': pos[idx][1]}
+            'position': {'x': pos[idx][0] * scale_x, 'y': pos[idx][1] * scale_y} if pos is not None else {'x': 0, 'y': 0}
         } for idx, params in G.nodes(data=True) ]
     elements += [graph_edge_as_elements(s, t, params) for s, t, params in G.edges(data=True)]
     return elements
@@ -58,3 +58,12 @@ def filter_edge_from_elements(edge, elements):
         e['data']['target'] != edge['data']['target']
 
     return list(filter(pred, elements))
+
+
+def modify_by_id(elements, id, key, value):
+    elems = [elem for elem in elements if elem['data']['id'] == id]
+    if len(elems) != 1:
+        raise RuntimeError(f'Detected {len(elems)} elements for {id=}. Expected 1.')
+    elem = elems[0]
+    elem['data'][key] = value
+    return [elem for elem in elements if elem['data']['id'] != id] + [elem]
